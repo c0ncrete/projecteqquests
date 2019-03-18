@@ -4,7 +4,7 @@ function event_say(e)
 	local qglobals = eq.get_qglobals(e.other);
 	if(e.other:Class() == "Shadow Knight") then
 		if(e.message:findi("hail")) then
-			if(e.other:HasItem(14383)) then --Have Epic 1.0 Innoruuk's Curse
+			if(e.other:HasItem(14383) or qglobals["shadowknight_pre"] == "2") then --Have Epic 1.0 Innoruuk's Curse or Pre_quest Complete
 				if(qglobals["shadowknight_epic"] == nil) then
 					eq.set_global("shadowknight_epic","1",5,"F"); --Flagged to start epic
 				end
@@ -52,5 +52,5 @@ function event_trade(e)
 		eq.set_global("shadowknight_epic","5",5,"F");
 		e.other:SummonItem(11407); -- first version of Sheathed Innoruuk's Voice
 	end
-	item_lib.return_items(e.self, e.other, e.trade, e.text);
+	item_lib.return_items(e.self, e.other, e.trade);
 end
